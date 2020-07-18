@@ -43,10 +43,14 @@
   import 'codemirror/theme/monokai.css'
   import 'codemirror/theme/solarized.css'
   import 'codemirror/theme/material.css'
+  import 'codemirror/theme/midnight.css'
+  import 'codemirror/theme/dracula.css'
 
   // mode
   import 'codemirror/mode/clike/clike.js'
   import 'codemirror/mode/python/python.js'
+  import 'codemirror/mode/javascript/javascript.js'
+  import 'codemirror/mode/go/go.js'
 
   // active-line.js
   import 'codemirror/addon/selection/active-line.js'
@@ -56,6 +60,12 @@
   import 'codemirror/addon/fold/foldgutter.js'
   import 'codemirror/addon/fold/brace-fold.js'
   import 'codemirror/addon/fold/indent-fold.js'
+
+  // keymap
+  import 'codemirror/keymap/sublime.js'
+
+  // edit
+  import 'codemirror/addon/edit/closebrackets.js'
 
   export default {
     name: 'CodeMirror',
@@ -70,7 +80,7 @@
       languages: {
         type: Array,
         default: () => {
-          return ['C', 'C++', 'Java', 'Python2']
+          return ['C', 'C++', 'Java', 'Python2', 'JavaScript', 'GoLang']
         }
       },
       language: {
@@ -79,7 +89,7 @@
       },
       theme: {
         type: String,
-        default: 'solarized'
+        default: 'material'
       }
     },
     data () {
@@ -94,10 +104,12 @@
           // 代码折叠
           foldGutter: true,
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+          autoCloseBrackets: true,
           // 选中文本自动高亮，及高亮方式
           styleSelectedText: true,
           lineWrapping: true,
-          highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true}
+          highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
+          keyMap: 'sublime'
         },
         mode: {
           'C++': 'text/x-csrc'
@@ -105,7 +117,9 @@
         themes: [
           {label: this.$i18n.t('m.Monokai'), value: 'monokai'},
           {label: this.$i18n.t('m.Solarized_Light'), value: 'solarized'},
-          {label: this.$i18n.t('m.Material'), value: 'material'}
+          {label: this.$i18n.t('m.Material'), value: 'material'},
+          {label: this.$i18n.t('m.Midnight'), value: 'midnight'},
+          {label: this.$i18n.t('m.Dracula'), value: 'dracula'}
         ]
       }
     },
@@ -182,7 +196,7 @@
     height: auto !important;
   }
   .CodeMirror-scroll {
-    min-height: 300px;
+    min-height: 500px;
     max-height: 1000px;
   }
 </style>

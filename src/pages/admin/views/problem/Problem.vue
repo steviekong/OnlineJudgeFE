@@ -306,6 +306,7 @@
         spjMode: '',
         disableRuleType: false,
         routeName: '',
+        tagList: [],
         error: {
           tags: '',
           spj: '',
@@ -432,14 +433,22 @@
         }
       },
       querySearch (queryString, cb) {
-        api.getProblemTagList().then(res => {
-          let tagList = []
-          for (let tag of res.data.data) {
-            tagList.push({value: tag.name})
-          }
-          cb(tagList)
-        }).catch(() => {
-        })
+        let tagList = this.tagList
+        if (tagList.length === 0) {
+          api.getProblemTagList().then(res => {
+            for (let tag of res.data.data) {
+              tagList.push({value: tag.name})
+            }
+          }).catch(() => {
+          })
+        }
+        var results = queryString ? tagList.filter(this.createFilter(queryString)) : tagList
+        cb(results)
+      },
+      createFilter (queryString) {
+        return (tag) => {
+          return (tag.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
       },
       resetTestCase () {
         this.testCaseUploaded = false
@@ -600,7 +609,7 @@
       }
     }
     .input-new-tag {
-      width: 78px;
+      width: 300px;
     }
     .button-new-tag {
       height: 24px;

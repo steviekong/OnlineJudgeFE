@@ -141,6 +141,8 @@ export const m = {
   Monokai: 'Monokai',
   Solarized_Light: 'Solarized Light',
   Material: 'Material',
+  Midnight: 'Midnight',
+  Dracula: 'Dracula',
   // KatexEditor.vue
   Latex_Editor: 'Latex Editor',
   // NavBar.vue
