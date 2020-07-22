@@ -36,7 +36,7 @@ export const m = {
   // About.vue
   Compiler: 'Compiler',
   Result_Explanation: 'Result Explanation',
-  Pending_Judging_Description: 'You solution will be judged soon, please wait for result.',
+  Pending_Judging_Description: 'Your solution will be judged soon, please wait for result.',
   Compile_Error_Description: "Failed to compile your source code. Click on the link to see compiler's output.",
   Accepted_Description: 'Congratulations. Your solution is correct.',
   Wrong_Answer_Description: "Your program's output doesn't match judger's answer.",

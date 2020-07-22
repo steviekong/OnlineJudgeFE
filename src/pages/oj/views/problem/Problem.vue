@@ -186,8 +186,12 @@
           <ECharts :options="pie"></ECharts>
         </div>
       </Card>
-    </div>
 
+      <div id = "cam">
+        <ProctorWebCam v-if="proctoring_webcam"></ProctorWebCam>
+      </div>
+
+    </div>
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
         <ECharts :options="largePie" :initOptions="largePieInitOpts"></ECharts>
@@ -208,6 +212,7 @@
   import {JUDGE_STATUS, CONTEST_STATUS, buildProblemCodeKey} from '@/utils/constants'
   import api from '@oj/api'
   import {pie, largePie} from './chartData'
+  import ProctorWebCam from '@oj/components/ProctorWebCam.vue'
 
   // 只显示这些状态的图形占用
   const filtedStatus = ['-1', '-2', '0', '1', '2', '3', '4', '8']
@@ -215,7 +220,8 @@
   export default {
     name: 'Problem',
     components: {
-      CodeMirror
+      CodeMirror,
+      ProctorWebCam
     },
     mixins: [FormMixin],
     data () {
@@ -234,6 +240,7 @@
         theme: 'solarized',
         submissionId: '',
         submitted: false,
+        proctoring_webcam: false,
         result: {
           result: 9
         },
@@ -303,6 +310,7 @@
           if (template && template[this.language]) {
             this.code = template[this.language]
           }
+          this.proctoring_webcam = problem.proctoring_webcam
         }, () => {
           this.$Loading.error()
         })
@@ -346,6 +354,7 @@
       handleRoute (route) {
         this.$router.push(route)
       },
+
       onChangeLang (newLang) {
         if (this.problem.template[newLang]) {
           if (this.code.trim() === '') {
@@ -521,7 +530,7 @@
     }
     #right-column {
       flex: none;
-      width: 220px;
+      width: 320px;
     }
   }
 
@@ -607,7 +616,7 @@
   #pieChart {
     .echarts {
       height: 250px;
-      width: 210px;
+      width: 320px;
     }
     #detail {
       position: absolute;
@@ -620,6 +629,10 @@
     margin-top: 20px;
     width: 500px;
     height: 480px;
+  }
+
+  #cam {
+    margin-top: 20px;
   }
 </style>
 

@@ -185,6 +185,11 @@
             <code-mirror v-model="problem.spj_code" :mode="spjMode"></code-mirror>
           </Accordion>
         </el-form-item>
+        <el-form-item :label="$t('m.Proctoring')" >
+          <el-col :span="24">
+            <el-checkbox v-model="problem.proctoring_webcam" @click.native.prevent="switchWebcam()">{{$t('m.Use_Webcam')}}</el-checkbox>
+          </el-col>
+        </el-form-item>
         <el-row :gutter="20">
           <el-col :span="4">
             <el-form-item :label="$t('m.Type')">
@@ -347,7 +352,8 @@
           rule_type: 'ACM',
           hint: '',
           source: '',
-          io_mode: {'io_mode': 'Standard IO', 'input': 'input.txt', 'output': 'output.txt'}
+          io_mode: {'io_mode': 'Standard IO', 'input': 'input.txt', 'output': 'output.txt'},
+          proctoring_webcam: false
         }
         let contestID = this.$route.params.contestId
         if (contestID) {
@@ -431,6 +437,9 @@
         } else {
           this.problem.spj = !this.problem.spj
         }
+      },
+      switchWebcam () {
+        this.problem.proctoring_webcam = !this.problem.proctoring_webcam
       },
       querySearch (queryString, cb) {
         let tagList = this.tagList
