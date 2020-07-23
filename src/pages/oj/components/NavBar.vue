@@ -1,24 +1,24 @@
 <template>
   <div id="header">
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
-      <div class="logo"><span>{{website.website_name}}</span></div>
-      <Menu-item name="/">
+      <div class="logo"><img src="../../../assets/masailogo.png" ></div>
+      <!-- <Menu-item name="/">
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
-      </Menu-item>
-      <Menu-item name="/problem">
+      </Menu-item> -->
+      <Menu-item name="/problem" v-if="isAdminRole">
         <Icon type="ios-keypad"></Icon>
         {{$t('m.NavProblems')}}
       </Menu-item>
-      <Menu-item name="/contest">
+      <Menu-item name="/contest" v-if="isAdminRole">
         <Icon type="trophy"></Icon>
         {{$t('m.Contests')}}
       </Menu-item>
-      <Menu-item name="/status">
+      <Menu-item name="/status" v-if="isAdminRole">
         <Icon type="ios-pulse-strong"></Icon>
         {{$t('m.NavStatus')}}
       </Menu-item>
-      <Submenu name="rank">
+      <!-- <Submenu name="rank">
         <template slot="title">
           <Icon type="podium"></Icon>
           {{$t('m.Rank')}}
@@ -29,8 +29,8 @@
         <Menu-item name="/oi-rank">
           {{$t('m.OI_Rank')}}
         </Menu-item>
-      </Submenu>
-      <Submenu name="about">
+      </Submenu> -->
+      <!-- <Submenu name="about">
         <template slot="title">
           <Icon type="information-circled"></Icon>
           {{$t('m.About')}}
@@ -41,7 +41,8 @@
         <Menu-item name="/FAQ">
           {{$t('m.FAQ')}}
         </Menu-item>
-      </Submenu>
+      </Submenu> -->
+
       <template v-if="!isAuthenticated">
         <div class="btn-menu">
           <Button type="ghost"
@@ -49,12 +50,12 @@
                   shape="circle"
                   @click="handleBtnClick('login')">{{$t('m.Login')}}
           </Button>
-          <Button v-if="website.allow_register"
+          <!-- <Button v-if="website.allow_register"
                   type="ghost"
                   shape="circle"
                   @click="handleBtnClick('register')"
                   style="margin-left: 5px;">{{$t('m.Register')}}
-          </Button>
+          </Button> -->
         </div>
       </template>
       <template v-else>
@@ -62,12 +63,12 @@
           <Button type="text" class="drop-menu-title">{{ user.username }}
             <Icon type="arrow-down-b"></Icon>
           </Button>
-          <Dropdown-menu slot="list">
-            <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
+          <Dropdown-menu v-if="isAdminRole" slot="list">
+            <!-- <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
             <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
-            <Dropdown-item name="/setting/profile">{{$t('m.Settings')}}</Dropdown-item>
-            <Dropdown-item v-if="isAdminRole" name="/admin">{{$t('m.Management')}}</Dropdown-item>
-            <Dropdown-item divided name="/logout">{{$t('m.Logout')}}</Dropdown-item>
+            <Dropdown-item  name="/setting/profile">{{$t('m.Settings')}}</Dropdown-item> -->
+            <Dropdown-item  name="/admin">{{$t('m.Management')}}</Dropdown-item>
+            <Dropdown-item  divided name="/logout">{{$t('m.Logout')}}</Dropdown-item>
           </Dropdown-menu>
         </Dropdown>
       </template>
@@ -145,11 +146,16 @@
     .logo {
       margin-left: 2%;
       margin-right: 2%;
-      font-size: 20px;
       float: left;
-      line-height: 60px;
+      display: flex;
+      justify-content: left;
     }
 
+    .logo img{
+      flex-shrink: 0;
+      max-width: 25%;
+      max-height: 25%;
+    }
     .drop-menu {
       float: right;
       margin-right: 30px;

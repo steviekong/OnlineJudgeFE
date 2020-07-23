@@ -20,59 +20,75 @@ import {
 import * as Contest from '@oj/views/contest'
 import * as Setting from '@oj/views/setting'
 
+import store from '@/store/index'
+
+function checkAdminRights (to, from, next) {
+  store.dispatch('initApp').then(res => {
+    if (store.getters.isAdminRole) {
+      next()
+    } else {
+      next('/')
+    }
+  })
+}
+
 export default [
-  {
-    name: 'home',
-    path: '/',
-    meta: {title: 'Home'},
-    component: Home
-  },
+  // {
+  //   name: 'home',
+  //   path: '/',
+  //   meta: {title: 'Home'},
+  //   component: Home
+  // },
   {
     name: 'logout',
     path: '/logout',
     meta: {title: 'Logout'},
     component: Logout
   },
-  {
-    name: 'apply-reset-password',
-    path: '/apply-reset-password',
-    meta: {title: 'Apply Reset Password'},
-    component: ApplyResetPassword
-  },
-  {
-    name: 'reset-password',
-    path: '/reset-password/:token',
-    meta: {title: 'Reset Password'},
-    component: ResetPassword
-  },
+  // {
+  //   name: 'apply-reset-password',
+  //   path: '/apply-reset-password',
+  //   meta: {title: 'Apply Reset Password'},
+  //   component: ApplyResetPassword
+  // },
+  // {
+  //   name: 'reset-password',
+  //   path: '/reset-password/:token',
+  //   meta: {title: 'Reset Password'},
+  //   component: ResetPassword
+  // },
   {
     name: 'problem-list',
     path: '/problem',
     meta: {title: 'Problem List'},
+    beforeEnter: checkAdminRights,
     component: ProblemList
   },
-  {
-    name: 'problem-details',
-    path: '/problem/:problemID',
-    meta: {title: 'Problem Details'},
-    component: Problem
-  },
+  // {
+  //   name: 'problem-details',
+  //   path: '/problem/:problemID',
+  //   meta: {title: 'Problem Details'},
+  //   component: Problem
+  // },
   {
     name: 'submission-list',
     path: '/status',
     meta: {title: 'Submission List'},
+    beforeEnter: checkAdminRights,
     component: SubmissionList
   },
   {
     name: 'submission-details',
     path: '/status/:id/',
     meta: {title: 'Submission Details'},
+    beforeEnter: checkAdminRights,
     component: SubmissionDetails
   },
   {
     name: 'contest-list',
     path: '/contest',
     meta: {title: 'Contest List'},
+    beforeEnter: checkAdminRights,
     component: Contest.ContestList
   },
   {
@@ -96,41 +112,43 @@ export default [
         path: 'problem/:problemID/',
         component: Problem
       },
-      {
-        name: 'contest-announcement-list',
-        path: 'announcements',
-        component: Announcements
-      },
+      // {
+      //   name: 'contest-announcement-list',
+      //   path: 'announcements',
+      //   component: Announcements
+      // },
       {
         name: 'contest-rank',
         path: 'rank',
-        component: Contest.ContestRank
+        component: Contest.ContestRank,
+        beforeEnter: checkAdminRights
       },
       {
         name: 'acm-helper',
         path: 'helper',
-        component: Contest.ACMContestHelper
+        component: Contest.ACMContestHelper,
+        beforeEnter: checkAdminRights
       }
     ]
   },
-  {
-    name: 'acm-rank',
-    path: '/acm-rank',
-    meta: {title: 'ACM Rankings'},
-    component: ACMRank
-  },
-  {
-    name: 'oi-rank',
-    path: '/oi-rank',
-    meta: {title: 'OI Rankings'},
-    component: OIRank
-  },
-  {
-    name: 'user-home',
-    path: '/user-home',
-    component: UserHome,
-    meta: {requiresAuth: true, title: 'User Home'}
-  },
+  // {
+  //   name: 'acm-rank',
+  //   path: '/acm-rank',
+  //   meta: {title: 'ACM Rankings'},
+  //   component: ACMRank
+  // },
+  // {
+  //   name: 'oi-rank',
+  //   path: '/oi-rank',
+  //   meta: {title: 'OI Rankings'},
+  //   component: OIRank
+  // },
+  // {
+  //   name: 'user-home',
+  //   path: '/user-home',
+  //   component: UserHome,
+  //   meta: {requiresAuth: true, title: 'User Home'}
+  // },
   {
     path: '/setting',
     component: Setting.Settings,

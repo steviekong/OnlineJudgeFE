@@ -39,10 +39,10 @@
           {{$t('m.Overview')}}
         </VerticalMenu-item>
 
-        <VerticalMenu-item :disabled="contestMenuDisabled"
+        <!-- <VerticalMenu-item :disabled="contestMenuDisabled"
                            :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
           <Icon type="chatbubble-working"></Icon>
-          {{$t('m.Announcements')}}
+          {{$t('m.Announcements')}} -->
         </VerticalMenu-item>
 
         <VerticalMenu-item :disabled="contestMenuDisabled"
@@ -58,7 +58,7 @@
           {{$t('m.Submissions')}}
         </VerticalMenu-item>
 
-        <VerticalMenu-item v-if="OIContestRealTimePermission"
+        <VerticalMenu-item  v-if="OIContestRealTimePermission && showAdminHelper"
                            :disabled="contestMenuDisabled"
                            :route="{name: 'contest-rank', params: {contestID: contestID}}">
           <Icon type="stats-bars"></Icon>
