@@ -162,7 +162,7 @@
             <p>{{$t('m.Score')}}</p>
             <p>{{problem.total_score}}</p>
           </li>
-          <li>
+          <li v-if="isAdminRole">
             <p>{{$t('m.Tags')}}</p>
             <p>
               <Poptip trigger="hover" placement="left-end">
@@ -468,7 +468,7 @@
       }
     },
     computed: {
-      ...mapGetters(['problemSubmitDisabled', 'contestRuleType', 'OIContestRealTimePermission', 'contestStatus']),
+      ...mapGetters(['problemSubmitDisabled', 'contestRuleType', 'OIContestRealTimePermission', 'contestStatus', 'isAdminRole']),
       contest () {
         return this.$store.state.contest.contest
       },
