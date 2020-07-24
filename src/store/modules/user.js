@@ -42,6 +42,7 @@ const actions = {
       commit(types.CHANGE_PROFILE, {
         profile: res.data.data || {}
       })
+      return res.data.data
     })
   },
   clearProfile ({commit}) {

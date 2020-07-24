@@ -19,25 +19,27 @@
       }
     },
     mounted () {
-      this.video = this.$refs.video
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        this.video = this.$refs.video
         navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
           this.video.srcObject = mediaStream
         })
-        .catch(error => console.error('getUserMedia() error:', error))
+        .catch(error => error)
+        this.canvas = this.$refs.canvas
+        const username = this.$store.getters.user.username
+        const problemId = this.$route.params.problemId
+        const totalSendCount = 15
+        const delay = 60000
+        let intervalId = setInterval(() => {
+          this.captureAndSend(username, problemId)
+          if (this.sendCount === totalSendCount) {
+            clearInterval(intervalId)
+          }
+          this.sendCount++
+        }, delay)
+      } else {
+
       }
-      this.canvas = this.$refs.canvas
-      const username = this.$store.getters.user.username
-      const problemId = this.$route.params.problemId
-      const totalSendCount = 15
-      const delay = 60000
-      let intervalId = setInterval(() => {
-        this.captureAndSend(username, problemId)
-        if (this.sendCount === totalSendCount) {
-          clearInterval(intervalId)
-        }
-        this.sendCount++
-      }, delay)
     },
     methods: {
       captureAndSend (username, problemId) {

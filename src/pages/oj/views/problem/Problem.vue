@@ -109,10 +109,10 @@
             {{$t('m.Problems')}}
           </VerticalMenu-item>
 
-          <VerticalMenu-item :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
+          <!-- <VerticalMenu-item :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
             <Icon type="chatbubble-working"></Icon>
             {{$t('m.Announcements')}}
-          </VerticalMenu-item>
+          </VerticalMenu-item> -->
         </template>
 
         <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission" :route="submissionRoute">
@@ -121,7 +121,7 @@
         </VerticalMenu-item>
 
         <template v-if="this.contestID">
-          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission"
+          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && isAdminRole"
                              :route="{name: 'contest-rank', params: {contestID: contestID}}">
             <Icon type="stats-bars"></Icon>
             {{$t('m.Rankings')}}
@@ -162,7 +162,7 @@
             <p>{{$t('m.Score')}}</p>
             <p>{{problem.total_score}}</p>
           </li>
-          <li>
+          <li v-if="isAdminRole">
             <p>{{$t('m.Tags')}}</p>
             <p>
               <Poptip trigger="hover" placement="left-end">
@@ -188,7 +188,7 @@
       </Card>
 
       <div id = "cam">
-        <ProctorWebCam v-if="proctoring_webcam"></ProctorWebCam>
+        <ProctorWebCam v-if="(proctoring_webcam && mediaPermissions)"></ProctorWebCam>
       </div>
 
     </div>
@@ -241,6 +241,7 @@
         submissionId: '',
         submitted: false,
         proctoring_webcam: false,
+        mediaPermissions: false,
         result: {
           result: 9
         },
@@ -281,6 +282,7 @@
     mounted () {
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: false})
       this.init()
+      this.askMediaPermissions()
     },
     methods: {
       ...mapActions(['changeDomTitle']),
@@ -354,7 +356,15 @@
       handleRoute (route) {
         this.$router.push(route)
       },
-
+      askMediaPermissions () {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
+          this.mediaPermissions = true
+        })
+        .catch(error => {
+          this.mediaPermissions = false
+          return error
+        })
+      },
       onChangeLang (newLang) {
         if (this.problem.template[newLang]) {
           if (this.code.trim() === '') {
@@ -405,6 +415,9 @@
         this.refreshStatus = setTimeout(checkStatus, 2000)
       },
       submitCode () {
+        if (this.proctoring_webcam && this.mediaPermissions === false) {
+          return
+        }
         if (this.code.trim() === '') {
           this.$error(this.$i18n.t('m.Code_can_not_be_empty'))
           return
@@ -477,7 +490,7 @@
       }
     },
     computed: {
-      ...mapGetters(['problemSubmitDisabled', 'contestRuleType', 'OIContestRealTimePermission', 'contestStatus']),
+      ...mapGetters(['problemSubmitDisabled', 'contestRuleType', 'OIContestRealTimePermission', 'contestStatus', 'isAdminRole']),
       contest () {
         return this.$store.state.contest.contest
       },

@@ -4,6 +4,7 @@ import user from './modules/user'
 import contest from './modules/contest'
 import api from '@oj/api'
 import types from './types'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
@@ -68,7 +69,8 @@ export default new Vuex.Store({
   getters: rootGetters,
   mutations: rootMutations,
   actions: rootActions,
-  strict: debug
+  strict: debug,
+  plugins: [createPersistedState()]
 })
 
 export { types }

@@ -1,20 +1,20 @@
 // all routes here.
 import {
-  About,
-  ACMRank,
-  Announcements,
+  // About,
+  // ACMRank,
+  // Announcements,
   ApplyResetPassword,
-  FAQ,
-  Home,
+  // FAQ,
+  // Home,
   Logout,
   NotFound,
-  OIRank,
+  // OIRank,
   Problem,
   ProblemList,
   ResetPassword,
   SubmissionDetails,
-  SubmissionList,
-  UserHome
+  SubmissionList// ,
+  // UserHome
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -22,14 +22,13 @@ import * as Setting from '@oj/views/setting'
 
 import store from '@/store/index'
 
+// Verifies that current user
 function checkAdminRights (to, from, next) {
-  store.dispatch('initApp').then(res => {
-    if (store.getters.isAdminRole) {
-      next()
-    } else {
-      next('/')
-    }
-  })
+  if (store.getters.isAdminRole) {
+    next()
+  } else {
+    next('/404')
+  }
 }
 
 export default [
@@ -45,18 +44,20 @@ export default [
     meta: {title: 'Logout'},
     component: Logout
   },
-  // {
-  //   name: 'apply-reset-password',
-  //   path: '/apply-reset-password',
-  //   meta: {title: 'Apply Reset Password'},
-  //   component: ApplyResetPassword
-  // },
-  // {
-  //   name: 'reset-password',
-  //   path: '/reset-password/:token',
-  //   meta: {title: 'Reset Password'},
-  //   component: ResetPassword
-  // },
+  {
+    name: 'apply-reset-password',
+    path: '/apply-reset-password',
+    meta: {title: 'Apply Reset Password'},
+    beforeEnter: checkAdminRights,
+    component: ApplyResetPassword
+  },
+  {
+    name: 'reset-password',
+    path: '/reset-password/:token',
+    meta: {title: 'Reset Password'},
+    beforeEnter: checkAdminRights,
+    component: ResetPassword
+  },
   {
     name: 'problem-list',
     path: '/problem',
@@ -64,12 +65,13 @@ export default [
     beforeEnter: checkAdminRights,
     component: ProblemList
   },
-  // {
-  //   name: 'problem-details',
-  //   path: '/problem/:problemID',
-  //   meta: {title: 'Problem Details'},
-  //   component: Problem
-  // },
+  {
+    name: 'problem-details',
+    path: '/problem/:problemID',
+    meta: {title: 'Problem Details'},
+    beforeEnter: checkAdminRights,
+    component: Problem
+  },
   {
     name: 'submission-list',
     path: '/status',
@@ -81,7 +83,6 @@ export default [
     name: 'submission-details',
     path: '/status/:id/',
     meta: {title: 'Submission Details'},
-    beforeEnter: checkAdminRights,
     component: SubmissionDetails
   },
   {
@@ -152,6 +153,7 @@ export default [
   {
     path: '/setting',
     component: Setting.Settings,
+    beforeEnter: checkAdminRights,
     children: [
       {
         name: 'default-setting',
@@ -179,20 +181,26 @@ export default [
       }
     ]
   },
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   meta: {title: 'About'},
+  //   component: About
+  // },
+  // {
+  //   path: '/faq',
+  //   name: 'faq',
+  //   meta: {title: 'FAQ'},
+  //   component: FAQ
+  // },
   {
-    path: '/about',
-    name: 'about',
-    meta: {title: 'About'},
-    component: About
-  },
-  {
-    path: '/faq',
-    name: 'faq',
-    meta: {title: 'FAQ'},
-    component: FAQ
+    path: '/404',
+    meta: {title: '404'},
+    component: NotFound
   },
   {
     path: '*',
+    redirect: to => '/404',
     meta: {title: '404'},
     component: NotFound
   }

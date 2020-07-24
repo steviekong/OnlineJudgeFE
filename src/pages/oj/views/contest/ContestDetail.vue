@@ -38,12 +38,12 @@
           <Icon type="home"></Icon>
           {{$t('m.Overview')}}
         </VerticalMenu-item>
-
-        <!-- <VerticalMenu-item :disabled="contestMenuDisabled"
+<!-- 
+        <VerticalMenu-item :disabled="contestMenuDisabled"
                            :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
           <Icon type="chatbubble-working"></Icon>
-          {{$t('m.Announcements')}} -->
-        </VerticalMenu-item>
+          {{$t('m.Announcements')}}
+        </VerticalMenu-item> -->
 
         <VerticalMenu-item :disabled="contestMenuDisabled"
                            :route="{name: 'contest-problem-list', params: {contestID: contestID}}">
@@ -170,7 +170,7 @@
       }),
       ...mapGetters(
         ['contestMenuDisabled', 'contestRuleType', 'contestStatus', 'countdown', 'isContestAdmin',
-          'OIContestRealTimePermission', 'passwordFormVisible']
+          'OIContestRealTimePermission', 'passwordFormVisible', 'isAdminRole']
       ),
       countdownColor () {
         if (this.contestStatus) {

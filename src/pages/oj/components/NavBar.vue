@@ -60,9 +60,10 @@
       </template>
       <template v-else>
         <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
-          <Button type="text" class="drop-menu-title">{{ user.username }}
+          <Button v-if="isAdminRole" type="text" class="drop-menu-title">{{ user.username }}
             <Icon type="arrow-down-b"></Icon>
           </Button>
+          <div v-else class="drop-menu-title" >{{ user.username }}</div>
           <Dropdown-menu v-if="isAdminRole" slot="list">
             <!-- <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
             <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
