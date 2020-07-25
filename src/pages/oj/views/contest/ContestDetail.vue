@@ -38,12 +38,6 @@
           <Icon type="home"></Icon>
           {{$t('m.Overview')}}
         </VerticalMenu-item>
-<!-- 
-        <VerticalMenu-item :disabled="contestMenuDisabled"
-                           :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
-          <Icon type="chatbubble-working"></Icon>
-          {{$t('m.Announcements')}}
-        </VerticalMenu-item> -->
 
         <VerticalMenu-item :disabled="contestMenuDisabled"
                            :route="{name: 'contest-problem-list', params: {contestID: contestID}}">
@@ -58,7 +52,7 @@
           {{$t('m.Submissions')}}
         </VerticalMenu-item>
 
-        <VerticalMenu-item  v-if="OIContestRealTimePermission && showAdminHelper"
+        <VerticalMenu-item  v-if="OIContestRealTimePermission"
                            :disabled="contestMenuDisabled"
                            :route="{name: 'contest-rank', params: {contestID: contestID}}">
           <Icon type="stats-bars"></Icon>
@@ -70,6 +64,10 @@
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
         </VerticalMenu-item>
+        <VerticalMenu-item :route="{name: 'help'}">
+          <Icon type="help"></Icon>
+          Help
+        </VerticalMenu-item>  
       </VerticalMenu>
     </div>
   </div>

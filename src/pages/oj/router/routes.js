@@ -6,7 +6,7 @@ import {
   ApplyResetPassword,
   // FAQ,
   // Home,
-  Logout,
+  // Logout,
   NotFound,
   // OIRank,
   Problem,
@@ -27,7 +27,7 @@ function checkAdminRights (to, from, next) {
   if (store.getters.isAdminRole) {
     next()
   } else {
-    next('/404')
+    next('/')
   }
 }
 
@@ -38,12 +38,12 @@ export default [
   //   meta: {title: 'Home'},
   //   component: Home
   // },
-  {
-    name: 'logout',
-    path: '/logout',
-    meta: {title: 'Logout'},
-    component: Logout
-  },
+  // {
+  //   name: 'logout',
+  //   path: '/logout',
+  //   meta: {title: 'Logout'},
+  //   component: Logout
+  // },
   {
     name: 'apply-reset-password',
     path: '/apply-reset-password',
@@ -121,14 +121,17 @@ export default [
       {
         name: 'contest-rank',
         path: 'rank',
-        component: Contest.ContestRank,
-        beforeEnter: checkAdminRights
+        component: Contest.ContestRank
       },
       {
         name: 'acm-helper',
         path: 'helper',
-        component: Contest.ACMContestHelper,
-        beforeEnter: checkAdminRights
+        component: Contest.ACMContestHelper
+      },
+      {
+        name: 'help',
+        path: 'help',
+        component: Contest.Help
       }
     ]
   },
@@ -182,8 +185,8 @@ export default [
     ]
   },
   // {
-  //   path: '/about',
-  //   name: 'about',
+  //   path: '/help',
+  //   name: 'help',
   //   meta: {title: 'About'},
   //   component: About
   // },
@@ -194,13 +197,7 @@ export default [
   //   component: FAQ
   // },
   {
-    path: '/404',
-    meta: {title: '404'},
-    component: NotFound
-  },
-  {
     path: '*',
-    redirect: to => '/404',
     meta: {title: '404'},
     component: NotFound
   }

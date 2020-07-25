@@ -108,11 +108,6 @@
             <Icon type="ios-photos"></Icon>
             {{$t('m.Problems')}}
           </VerticalMenu-item>
-
-          <!-- <VerticalMenu-item :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
-            <Icon type="chatbubble-working"></Icon>
-            {{$t('m.Announcements')}}
-          </VerticalMenu-item> -->
         </template>
 
         <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission" :route="submissionRoute">
@@ -121,7 +116,7 @@
         </VerticalMenu-item>
 
         <template v-if="this.contestID">
-          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && isAdminRole"
+          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission"
                              :route="{name: 'contest-rank', params: {contestID: contestID}}">
             <Icon type="stats-bars"></Icon>
             {{$t('m.Rankings')}}
@@ -131,6 +126,10 @@
             {{$t('m.View_Contest')}}
           </VerticalMenu-item>
         </template>
+        <VerticalMenu-item :route="{name: 'help'}">
+          <Icon type="help"></Icon>
+          Help
+        </VerticalMenu-item>  
       </VerticalMenu>
 
       <Card id="info">
@@ -282,7 +281,6 @@
     mounted () {
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: false})
       this.init()
-      this.askMediaPermissions()
     },
     methods: {
       ...mapActions(['changeDomTitle']),
@@ -301,7 +299,10 @@
           problem.languages = problem.languages.sort()
           this.problem = problem
           this.changePie(problem)
-
+          this.proctoring_webcam = problem.proctoring_webcam
+          if (this.proctoring_webcam) {
+            this.askMediaPermissions()
+          }
           // 在beforeRouteEnter中修改了, 说明本地有code，无需加载template
           if (this.code !== '') {
             return
@@ -312,7 +313,6 @@
           if (template && template[this.language]) {
             this.code = template[this.language]
           }
-          this.proctoring_webcam = problem.proctoring_webcam
         }, () => {
           this.$Loading.error()
         })
@@ -362,6 +362,12 @@
         })
         .catch(error => {
           this.mediaPermissions = false
+          this.$alert('Please allow this page to use your webcam! Click OK to refresh', 'Warning', {
+            confirmButtonText: 'OK',
+            callback: action => {
+              this.$router.go()
+            }
+          })
           return error
         })
       },
@@ -416,6 +422,12 @@
       },
       submitCode () {
         if (this.proctoring_webcam && this.mediaPermissions === false) {
+          this.$alert('Please allow this page to use your webcam ! Click OK to refresh', 'Warning', {
+            confirmButtonText: 'OK',
+            callback: action => {
+              this.$router.go()
+            }
+          })
           return
         }
         if (this.code.trim() === '') {

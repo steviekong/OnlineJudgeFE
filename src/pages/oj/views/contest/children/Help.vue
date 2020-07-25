@@ -5,7 +5,6 @@
       <div class="content markdown-body">
         <ul>
           <li v-for="lang in languages">{{lang.name}} ( {{lang.description}} )
-            <pre>{{lang.config.compile.compile_command}}</pre>
           </li>
         </ul>
       </div>
@@ -16,19 +15,19 @@
       <div class="content">
         <ul>
           <li><b>{{$t('m.Pending')}} & {{$t('m.Judging')}}</b> : {{$t('m.Pending_Judging_Description')}}</li>
-          <li><b>{{$t('m.Compile_Error')}}</b> :	{{$t('m.Compile_Error_Description')}}
+          <li><b>{{$t('m.Compile_Error')}}</b> :  {{$t('m.Compile_Error_Description')}}
       </li>
-          <li><b>{{$t('m.Accepted')}}</b> :	{{$t('m.Accepted_Description')}}</li>
-          <li><b>{{$t('m.Wrong_Answer')}}</b> :	{{$t('m.Wrong_Answer_Description')}}</li>
+          <li><b>{{$t('m.Accepted')}}</b> : {{$t('m.Accepted_Description')}}</li>
+          <li><b>{{$t('m.Wrong_Answer')}}</b> : {{$t('m.Wrong_Answer_Description')}}</li>
           <li>
             <b>{{$t('m.Runtime_Error')}}</b>
-            :	{{$t('m.Runtime_Error_Description')}}
+            : {{$t('m.Runtime_Error_Description')}}
           </li>
           <li><b>{{$t('m.Time_Limit_Exceeded')}}</b>
-            :	{{$t('m.Time_Limit_Exceeded_Description')}}
+            : {{$t('m.Time_Limit_Exceeded_Description')}}
           </li>
-          <li><b>{{$t('m.Memory_Limit_Exceeded')}}</b> :	{{$t('m.Memory_Limit_Exceeded_Description')}}</li>
-          <li><b>{{$t('m.System_Error')}}</b> :	{{$t('m.System_Error_Description')}}
+          <li><b>{{$t('m.Memory_Limit_Exceeded')}}</b> :  {{$t('m.Memory_Limit_Exceeded_Description')}}</li>
+          <li><b>{{$t('m.System_Error')}}</b> : {{$t('m.System_Error_Description')}}
           </li>
         </ul>
       </div>
