@@ -93,7 +93,7 @@
                 v-model="tagInput"
                 :trigger-on-focus="false"
                 @keyup.enter.native="addTag"
-                @blur="addTag"
+                autofocus="true"
                 @select="addTag"
                 :fetch-suggestions="querySearch">
               </el-autocomplete>
@@ -465,8 +465,10 @@
       },
       addTag () {
         let inputValue = this.tagInput
-        if (inputValue) {
+        if (inputValue && !this.problem.tags.includes(inputValue)) {
           this.problem.tags.push(inputValue)
+        } else {
+          this.$error('Tag is empty or duplicate')
         }
         this.inputVisible = false
         this.tagInput = ''
