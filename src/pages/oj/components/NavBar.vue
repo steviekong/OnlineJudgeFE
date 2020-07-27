@@ -148,14 +148,14 @@
       margin-left: 2%;
       margin-right: 2%;
       float: left;
-      display: flex;
+      height: 100%;
       justify-content: left;
     }
 
     .logo img{
-      flex-shrink: 0;
-      max-width: 25%;
-      max-height: 25%;
+      max-width: 100%;
+      max-height: 100%;
+      padding-bottom: 5%;
     }
     .drop-menu {
       float: right;
