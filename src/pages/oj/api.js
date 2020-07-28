@@ -268,6 +268,20 @@ export default {
     return ajax('admin/contest/acm_helper', 'put', {
       data
     })
+  },
+  sendProctorImage (data) {
+    return new Promise((resolve, reject) => {
+      axios.post(process.env.PROCTOR_URL, data).then(res => {
+        if (res.status === 200) resolve(res)
+        else {
+          Vue.prototype.$error('Server Error')
+          reject(res)
+        }
+      }, res => {
+        reject(res)
+        Vue.prototype.$error('Server Error')
+      })
+    })
   }
 }
 

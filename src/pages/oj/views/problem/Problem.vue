@@ -187,7 +187,7 @@
       </Card>
 
       <div id = "cam">
-        <ProctorWebCam v-if="(proctoring_webcam && mediaPermissions)"></ProctorWebCam>
+        <ProctorWebCam :contestID="contestID" :problemID="problemID" v-if="(proctoring_webcam && mediaPermissions && contestID)"></ProctorWebCam>
       </div>
 
     </div>

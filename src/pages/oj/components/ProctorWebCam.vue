@@ -19,34 +19,33 @@
       }
     },
     mounted () {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        this.video = this.$refs.video
-        navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
-          this.video.srcObject = mediaStream
-        })
-        .catch(error => error)
-        this.canvas = this.$refs.canvas
-        const username = this.$store.getters.user.username
-        const problemId = this.$route.params.problemId
-        const totalSendCount = 15
-        const delay = 60000
-        let intervalId = setInterval(() => {
-          this.captureAndSend(username, problemId)
-          if (this.sendCount === totalSendCount) {
-            clearInterval(intervalId)
-          }
-          this.sendCount++
-        }, delay)
-      } else {
-
-      }
+      this.video = this.$refs.video
+      navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
+        this.video.srcObject = mediaStream
+      })
+      .catch(error => error)
+      this.canvas = this.$refs.canvas
+      const username = this.$store.getters.user.username
+      const contestID = this.$route.params.contestID
+      const totalSendCount = 5
+      const delay = 60000
+      let intervalId = setInterval(() => {
+        this.captureAndSend(username, contestID)
+        if (this.sendCount === totalSendCount) {
+          clearInterval(intervalId)
+        }
+        this.sendCount++
+      }, delay)
     },
     methods: {
-      captureAndSend (username, problemId) {
+      captureAndSend (currentUsername, currentContestID) {
         this.canvas.getContext('2d').drawImage(this.video, 0, 0, 320, 240)
         const image = this.canvas.toDataURL('image/webp')
-        // Implement send here
-        console.log('sent')
+        api.sendProctorImage({
+          username: currentUsername,
+          contestID: currentContestID,
+          dataURL: image
+        })
       }
     }
   }

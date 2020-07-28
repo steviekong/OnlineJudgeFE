@@ -1,11 +1,13 @@
 let date = require('moment')().format('YYYYMMDD')
 let commit = require('child_process').execSync('git rev-parse HEAD').toString().slice(0, 5)
 let version = `"${date}-${commit}"`
+let proctor = `"${process.env.PROCTOR_URL}"`
 
 console.log(`current version is ${version}`)
 
 module.exports = {
   NODE_ENV: '"development"',
   VERSION: version,
-  USE_SENTRY: '0'
+  USE_SENTRY: '0',
+  PROCTOR_URL: proctor
 }
