@@ -2,7 +2,7 @@
   <div>
     <Form ref="formLogin" :model="formLogin" :rules="ruleLogin">
       <FormItem prop="username">
-        <Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginUsername')" size="large" @on-enter="handleLogin">
+        <Input type="text" v-model="formLogin.username" :placeholder="$t('m.LoginEmail')" size="large" @on-enter="handleLogin">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
@@ -11,11 +11,11 @@
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="tfa_code" v-if="tfaRequired">
+      <!-- <FormItem prop="tfa_code" v-if="tfaRequired">
         <Input v-model="formLogin.tfa_code" :placeholder="$t('m.TFA_Code')">
         <Icon type="ios-lightbulb-outline" slot="prepend"></Icon>
         </Input>
-      </FormItem>
+      </FormItem> -->
     </Form>
     <div class="footer">
       <Button

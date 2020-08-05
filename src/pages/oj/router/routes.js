@@ -6,7 +6,7 @@ import {
   ApplyResetPassword,
   // FAQ,
   // Home,
-  // Logout,
+  Logout,
   NotFound,
   // OIRank,
   Problem,
@@ -38,12 +38,12 @@ export default [
   //   meta: {title: 'Home'},
   //   component: Home
   // },
-  // {
-  //   name: 'logout',
-  //   path: '/logout',
-  //   meta: {title: 'Logout'},
-  //   component: Logout
-  // },
+  {
+    name: 'logout',
+    path: '/logout',
+    meta: {title: 'Logout'},
+    component: Logout
+  },
   {
     name: 'apply-reset-password',
     path: '/apply-reset-password',
@@ -96,7 +96,7 @@ export default [
     name: 'contest-details',
     path: '/contest/:contestID/',
     component: Contest.ContestDetails,
-    meta: {title: 'Contest Details'},
+    meta: {title: 'Contest Details', requiresAuth: true},
     children: [
       {
         name: 'contest-submission-list',

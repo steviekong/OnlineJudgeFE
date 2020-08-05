@@ -64,10 +64,16 @@
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
         </VerticalMenu-item>
+
+        <VerticalMenu-item :disabled="contestMenuDisabled" :isResult="true">
+          <Icon type="star"></Icon>
+          Results
+        </VerticalMenu-item>
+
         <VerticalMenu-item :route="{name: 'help'}">
           <Icon type="help"></Icon>
           Help
-        </VerticalMenu-item>  
+        </VerticalMenu-item > 
       </VerticalMenu>
     </div>
   </div>

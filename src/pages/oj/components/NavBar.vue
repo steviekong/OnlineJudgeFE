@@ -75,9 +75,9 @@
       </template>
     </Menu>
     <Modal v-model="modalVisible" :width="400">
-      <div slot="header" class="modal-title">{{$t('m.Welcome_to')}} {{website.website_name_shortcut}}</div>
+      <div slot="header" class="modal-title">Login</div>
       <component :is="modalStatus.mode" v-if="modalVisible"></component>
-      <div slot="footer" style="display: none"></div>
+      <div slot="footer" class="modal-footer">Login information is the same as on www.masaischool.com</div>
     </Modal>
   </div>
 </template>
@@ -85,12 +85,10 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import login from '@oj/views/user/Login'
-  import register from '@oj/views/user/Register'
 
   export default {
     components: {
-      login,
-      register
+      login
     },
     mounted () {
       this.getProfile()
@@ -177,6 +175,10 @@
     &-title {
       font-size: 18px;
       font-weight: 600;
+    }
+    &-footer {
+      padding-top: 5%;
+      text-align: left;
     }
   }
 </style>

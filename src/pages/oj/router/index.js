@@ -25,17 +25,10 @@ router.beforeEach((to, from, next) => {
   Vue.prototype.$Loading.start()
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!storage.get(STORAGE_KEY.AUTHED)) {
-      Vue.prototype.$error('Please login first')
       store.commit(types.CHANGE_MODAL_STATUS, {mode: 'login', visible: true})
-      next({
-        name: 'home'
-      })
-    } else {
-      next()
     }
-  } else {
-    next()
   }
+  next()
 })
 
 router.afterEach((to, from, next) => {

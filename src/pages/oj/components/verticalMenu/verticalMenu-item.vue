@@ -17,11 +17,17 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      isResult: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
       handleClick () {
-        if (this.route) {
+        if (this.isResult) {
+          window.open(`${process.env.PROCTOR_URL}/contest/result`, '_blank')
+        } else if (this.route) {
           this.dispatch('VerticalMenu', 'on-click', this.route)
         }
       }

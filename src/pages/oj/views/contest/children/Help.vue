@@ -1,7 +1,7 @@
 <template>
   <div>
     <panel class="container">
-      <div slot="title">{{$t('m.Compiler')}} & {{$t('m.Judger')}}</div>
+      <div slot="title">Supported Languages</div>
       <div class="content markdown-body">
         <ul>
           <li v-for="lang in languages">{{lang.name}} ( {{lang.description}} )
@@ -32,29 +32,35 @@
         </ul>
       </div>
     </panel>
-  <panel class="container">
-    <div slot="title">{{$t('m.Frequently_Asked_Questions')}}</div>
-    <div class="content markdown-body">
-      <ul>
-        <li>{{$t('m.Where_is_the_input_and_the_output')}} 
-          <p>{{$t('m.Where_is_the_input_and_the_output_answer_part_1')}} <code>stdin</code> ('{{$t('m.Standard_Input')}}') {{$t('m.Where_is_the_input_and_the_output_answer_part_3')}} <code>stdout</code>
-            ('{{$t('m.Standard_Output')}}') {{$t('m.Where_is_the_input_and_the_output_answer_part_5')}} <code>scanf</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_6')}} <code>cin</code>
-            {{$t('m.Where_is_the_input_and_the_output_answer_part_7')}} <code>printf</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_8')}} <code>cout</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_9')}} <code>{{$t('m.Runtime_Error')}}</code>.
+    <panel class="container">
+      <div slot="title">{{$t('m.Frequently_Asked_Questions')}}</div>
+      <div class="content markdown-body">
+        <ul>
+          <li>{{$t('m.Where_is_the_input_and_the_output')}} 
+            <p>{{$t('m.Where_is_the_input_and_the_output_answer_part_1')}} <code>stdin</code> ('{{$t('m.Standard_Input')}}') {{$t('m.Where_is_the_input_and_the_output_answer_part_3')}} <code>stdout</code>
+              ('{{$t('m.Standard_Output')}}') {{$t('m.Where_is_the_input_and_the_output_answer_part_5')}} <code>scanf</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_6')}} <code>cin</code>
+              {{$t('m.Where_is_the_input_and_the_output_answer_part_7')}} <code>printf</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_8')}} <code>cout</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_9')}} <code>{{$t('m.Runtime_Error')}}</code>.
+            </p>
+          </li>
+          <li>{{$t('m.What_is_the_meaning_of_submission_execution_time')}} 
+          <p>{{$t('m.What_is_the_meaning_of_submission_execution_time_answer')}} 
           </p>
-        </li>
-        <li>{{$t('m.What_is_the_meaning_of_submission_execution_time')}} 
-        <p>{{$t('m.What_is_the_meaning_of_submission_execution_time_answer')}} 
-        </p>
-        </li>
-        <li>{{$t('m.How_Can_I_use_CPP_Int64')}} 
-          <p>{{$t('m.How_Can_I_use_CPP_Int64_answer_part_1')}}<code>long long</code> {{$t('m.How_Can_I_use_CPP_Int64_answer_part_2')}} <code>cin/cout</code> {{$t('m.or')}} <code>%lld</code>, {{$t('m.using')}}<code> __int64</code> {{$t('m.How_Can_I_use_CPP_Int64_answer_part_3')}} <code>{{$t('m.Compile_Error')}}</code>.</p>
-        </li>
-        <li>{{$t('m.Java_specifications')}}
-          <p>{{$t('m.Java_specifications_answer_part_1')}} <code>Main</code> {{$t('m.Java_specifications_answer_part_2')}} <code>Main</code> {{$t('m.Java_specifications_answer_part_3')}}</p>
-        </li>
-      </ul>
-    </div>
-  </panel>
+          </li>
+          <li>{{$t('m.How_Can_I_use_CPP_Int64')}} 
+            <p>{{$t('m.How_Can_I_use_CPP_Int64_answer_part_1')}}<code>long long</code> {{$t('m.How_Can_I_use_CPP_Int64_answer_part_2')}} <code>cin/cout</code> {{$t('m.or')}} <code>%lld</code>, {{$t('m.using')}}<code> __int64</code> {{$t('m.How_Can_I_use_CPP_Int64_answer_part_3')}} <code>{{$t('m.Compile_Error')}}</code>.</p>
+          </li>
+          <li>{{$t('m.Java_specifications')}}
+            <p>{{$t('m.Java_specifications_answer_part_1')}} <code>Main</code> {{$t('m.Java_specifications_answer_part_2')}} <code>Main</code> {{$t('m.Java_specifications_answer_part_3')}}</p>
+          </li>
+          <li>How do I know I'm done with the assessment?
+            <p>You should have green check-mark next all the problems on the problems page.</p>
+          </li>
+          <li>How do I get back to the Masai Admissions Dashboard?
+            <p>Click on the Masai Dashboard button on the vertical menu bar on the right.</p>
+          </li>
+        </ul>
+      </div>
+    </panel>
   </div>
 </template>
 
@@ -84,6 +90,7 @@
     .content {
       font-size: 16px;
       margin: 0 50px 20px 50px;
+      word-break: break-word;
       > ul {
         list-style: disc;
         li {
