@@ -68,21 +68,7 @@
             title: this.$i18n.t('m.User_User'),
             align: 'center',
             render: (h, params) => {
-              return h('a', {
-                style: {
-                  display: 'inline-block',
-                  'max-width': '150px'
-                },
-                on: {
-                  click: () => {
-                    this.$router.push(
-                      {
-                        name: 'user-home',
-                        query: {username: params.row.user.username}
-                      })
-                  }
-                }
-              }, params.row.user.username)
+              return h('span', params.row.user.username)
             }
           },
           {

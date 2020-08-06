@@ -20,15 +20,15 @@
             </li>
 
 
-            <li>
+            <!-- <li>
               <i-switch size="large" v-model="formFilter.myself" @on-change="handleQueryChange">
                 <span slot="open">{{$t('m.Mine')}}</span>
                 <span slot="close">{{$t('m.All')}}</span>
               </i-switch>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
               <Input v-model="formFilter.username" :placeholder="$t('m.Search_Author')" @on-enter="handleQueryChange"/>
-            </li>
+            </li> -->
 
             <li>
               <Button type="info" icon="refresh" @click="getSubmissions">{{$t('m.Refresh')}}</Button>
@@ -58,7 +58,7 @@
     data () {
       return {
         formFilter: {
-          myself: false,
+          myself: true,
           result: '',
           username: ''
         },
@@ -152,21 +152,7 @@
             title: this.$i18n.t('m.Author'),
             align: 'center',
             render: (h, params) => {
-              return h('a', {
-                style: {
-                  'display': 'inline-block',
-                  'max-width': '150px'
-                },
-                on: {
-                  click: () => {
-                    this.$router.push(
-                      {
-                        name: 'user-home',
-                        query: {username: params.row.username}
-                      })
-                  }
-                }
-              }, params.row.username)
+              return h('span', params.row.username)
             }
           }
         ],
@@ -206,7 +192,7 @@
       },
       buildQuery () {
         return {
-          myself: this.formFilter.myself === true ? '1' : '0',
+          myself: '1',
           result: this.formFilter.result,
           username: this.formFilter.username,
           page: this.page

@@ -34,6 +34,12 @@
     </div>
     <div v-show="showMenu" id="contest-menu">
       <VerticalMenu @on-click="handleRoute">
+
+        <VerticalMenu-item v-if="!contestMenuDisabled && contest.contest_type != 'Public' " :isResult="true">
+          <Icon type="checkmark-circled"></Icon>
+          End Assessment
+        </VerticalMenu-item>
+
         <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID}}">
           <Icon type="home"></Icon>
           {{$t('m.Overview')}}
@@ -63,11 +69,6 @@
                            :route="{name: 'acm-helper', params: {contestID: contestID}}">
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
-        </VerticalMenu-item>
-
-        <VerticalMenu-item :disabled="contestMenuDisabled" :isResult="true">
-          <Icon type="star"></Icon>
-          Results
         </VerticalMenu-item>
 
         <VerticalMenu-item :route="{name: 'help'}">

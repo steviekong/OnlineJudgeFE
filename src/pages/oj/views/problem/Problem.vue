@@ -41,11 +41,11 @@
             </Card>
           </div>
 
-          <div v-if="problem.source">
+          <!-- <div v-if="problem.source">
             <p class="title">{{$t('m.Source')}}</p>
             <p class="content">{{problem.source}}</p>
           </div>
-
+ -->
         </div>
       </Panel>
       <!--problem main end-->
@@ -104,6 +104,12 @@
     <div id="right-column">
       <VerticalMenu @on-click="handleRoute">
         <template v-if="this.contestID">
+
+          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && proctoring_webcam" :isResult="true">
+            <Icon type="checkmark-circled"></Icon>
+            End Assessment            
+          </VerticalMenu-item>
+
           <VerticalMenu-item :route="{name: 'contest-problem-list', params: {contestID: contestID}}">
             <Icon type="ios-photos"></Icon>
             {{$t('m.Problems')}}
@@ -187,7 +193,7 @@
       </Card>
 
       <div id = "cam">
-        <ProctorWebCam :contestID="contestID" :problemID="problemID" v-if="(proctoring_webcam && mediaPermissions && contestID)"></ProctorWebCam>
+        <ProctorWebCam :contestID="contestID" :problemID="problemID" v-if="(proctoring_webcam && mediaPermissions && contestID && !isAdminRole)"></ProctorWebCam>
       </div>
 
     </div>

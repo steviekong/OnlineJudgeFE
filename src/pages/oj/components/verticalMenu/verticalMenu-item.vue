@@ -1,5 +1,5 @@
 <template>
-  <li @click.stop="handleClick" :class="{disabled: disabled}">
+  <li @click.stop="handleClick" :class="{disabled: disabled, result: isResult}">
     <slot></slot>
   </li>
 </template>
@@ -26,7 +26,13 @@
     methods: {
       handleClick () {
         if (this.isResult) {
-          window.open(`${process.env.PROCTOR_URL}/contest/result`, '_blank')
+          this.$confirm('Are you sure you want to end the assessment?', 'Confirm', {
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+          }).then(() => {
+            window.open(`${process.env.PROCTOR_URL}/contest/result`, '_self')
+          })
         } else if (this.route) {
           this.dispatch('VerticalMenu', 'on-click', this.route)
         }
@@ -46,6 +52,16 @@
       border-left: none;
       color: #ccc;
       background: #fff;
+    }
+  }
+
+  .result{
+    background-color: #19be6b;
+    color: white;
+    &:hover {
+      background: #f5f5f5;
+      color: #ed3f14;
+      border-left: 2px solid #ed3f14;
     }
   }
 

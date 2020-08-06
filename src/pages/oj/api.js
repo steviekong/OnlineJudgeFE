@@ -270,17 +270,13 @@ export default {
     })
   },
   sendProctorImage (data) {
-    return new Promise((resolve, reject) => {
-      axios.post(`${process.env.PROCTOR_URL}/proctor/images`, data).then(res => {
-        if (res.status === 200) resolve(res)
-        else {
-          Vue.prototype.$error('Server Error')
-          reject(res)
-        }
-      }, res => {
-        reject(res)
+    axios.post(`${process.env.PROCTOR_URL}/proctor/images`, data).then(res => {
+      if (res.status !== 200) {
         Vue.prototype.$error('Server Error')
-      })
+      }
+    })
+    .catch((err) => {
+      console.log(err)
     })
   }
 }
