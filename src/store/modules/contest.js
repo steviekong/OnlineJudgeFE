@@ -3,7 +3,7 @@ import types from '../types'
 import api from '@oj/api'
 import { CONTEST_STATUS, USER_TYPE, CONTEST_TYPE } from '@/utils/constants'
 
-const state = {
+export const state = {
   now: moment(),
   access: false,
   rankLimit: 30,

@@ -107,7 +107,7 @@
 
           <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && proctoring_webcam" :isResult="true">
             <Icon type="checkmark-circled"></Icon>
-            End Assessment            
+            Submit Assessment            
           </VerticalMenu-item>
 
           <VerticalMenu-item :route="{name: 'contest-problem-list', params: {contestID: contestID}}">

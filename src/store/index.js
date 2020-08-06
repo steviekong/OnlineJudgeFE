@@ -60,6 +60,10 @@ const rootActions = {
   }
 }
 
+const dataState = createPersistedState({
+  paths: ['user.state', 'contest.state']
+})
+
 export default new Vuex.Store({
   modules: {
     user,
@@ -70,7 +74,7 @@ export default new Vuex.Store({
   mutations: rootMutations,
   actions: rootActions,
   strict: debug,
-  plugins: [createPersistedState()]
+  plugins: [dataState]
 })
 
 export { types }

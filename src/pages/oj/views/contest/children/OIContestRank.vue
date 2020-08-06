@@ -1,7 +1,7 @@
 <template>
   <Panel shadow>
     <div slot="title">{{ contest.title }}</div>
-    <div slot="extra">
+    <!-- <div slot="extra">
       <screen-full :height="18" :width="18" class="screen-full"></screen-full>
       <Poptip trigger="hover" placement="left-start">
         <Icon type="android-settings" size="20"></Icon>
@@ -25,7 +25,7 @@
           </p>
         </div>
       </Poptip>
-    </div>
+    </div> -->
     <div v-show="showChart" class="echarts">
       <ECharts :options="options" ref="chart" auto-resize></ECharts>
     </div>

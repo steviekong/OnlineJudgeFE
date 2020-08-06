@@ -32,6 +32,8 @@
             type: 'warning'
           }).then(() => {
             window.open(`${process.env.PROCTOR_URL}/contest/result`, '_self')
+          }).catch(() => {
+            this.$error('Submission Cancelled')
           })
         } else if (this.route) {
           this.dispatch('VerticalMenu', 'on-click', this.route)

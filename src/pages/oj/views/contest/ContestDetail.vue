@@ -37,7 +37,7 @@
 
         <VerticalMenu-item v-if="!contestMenuDisabled && contest.contest_type != 'Public' " :isResult="true">
           <Icon type="checkmark-circled"></Icon>
-          End Assessment
+          Submit Assessment
         </VerticalMenu-item>
 
         <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID}}">

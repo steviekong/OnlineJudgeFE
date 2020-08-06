@@ -26,16 +26,15 @@
             </p>
           </li>
           <li>How do I end the assessment?
-            <p>Click on the <b>End Assessment</b> button on the vertical menu bar on the right to view your result.</p>
+            <p>Click on the <b>Submit Assessment</b> button on the vertical menu bar on the right to view your result.</p>
           </li>
           <li>What should I do if the contest has ended?
-            <p>Click on the <b>End Assessment</b> button on the vertical menu bar on the right to view your result.</p> 
+            <p>Click on the <b>Submit Assessment</b> button on the vertical menu bar on the right to view your result.</p> 
           </li>
         </ul>
       </div>
     </panel>
 
-    
     <panel class="container">
       <div slot="title">Supported Languages</div>
       <div class="content markdown-body">

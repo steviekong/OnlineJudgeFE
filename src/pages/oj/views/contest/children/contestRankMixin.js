@@ -50,7 +50,7 @@ export default {
     }),
     showChart: {
       get () {
-        return this.$store.state.contest.itemVisible.chart
+        return false
       },
       set (value) {
         this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {chart: value})

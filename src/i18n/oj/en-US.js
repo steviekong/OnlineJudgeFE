@@ -112,7 +112,7 @@ export const m = {
   Problems: 'Problems',
   Announcements: 'Announcements',
   Submissions: 'Submissions',
-  Rankings: 'Rankings',
+  Rankings: 'Scores',
   Overview: 'Overview',
   Admin_Helper: 'Admin Helper',
   StartAt: 'Start At',
