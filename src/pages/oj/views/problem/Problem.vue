@@ -305,7 +305,7 @@
           this.problem = problem
           this.changePie(problem)
           this.proctoring_webcam = problem.proctoring_webcam
-          if (this.proctoring_webcam) {
+          if (this.proctoring_webcam && !this.isAdminRole) {
             this.askMediaPermissions()
           }
           // 在beforeRouteEnter中修改了, 说明本地有code，无需加载template
@@ -362,21 +362,19 @@
         this.$router.push(route)
       },
       askMediaPermissions () {
-        if (!this.isAdminRole) {
-          navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
-            this.mediaPermissions = true
+        navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
+          this.mediaPermissions = true
+        })
+        .catch(error => {
+          this.mediaPermissions = false
+          this.$alert('Please allow this page to use your webcam! Click OK to refresh', 'Warning', {
+            confirmButtonText: 'OK',
+            callback: action => {
+              this.$router.go()
+            }
           })
-          .catch(error => {
-            this.mediaPermissions = false
-            this.$alert('Please allow this page to use your webcam! Click OK to refresh', 'Warning', {
-              confirmButtonText: 'OK',
-              callback: action => {
-                this.$router.go()
-              }
-            })
-            return error
-          })
-        }
+          return error
+        })
       },
       onChangeLang (newLang) {
         if (this.problem.template[newLang]) {
