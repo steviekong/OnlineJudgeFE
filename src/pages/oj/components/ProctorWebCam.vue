@@ -15,7 +15,8 @@
       return {
         video: {},
         canvas: {},
-        sendCount: 1
+        sendCount: 1,
+        intervalId: null
       }
     },
     mounted () {
@@ -36,6 +37,7 @@
         }
         this.sendCount++
       }, delay)
+      this.intervalId = intervalId
     },
     methods: {
       captureAndSend (currentUsername, currentContestID) {
@@ -47,6 +49,12 @@
           dataURL: image
         })
       }
+    },
+    beforeDestroy () {
+      clearInterval(this.intervalId)
+      this.video.srcObject.getTracks().forEach((track) => {
+        track.stop()
+      })
     }
   }
 </script>

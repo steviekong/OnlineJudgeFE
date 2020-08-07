@@ -285,7 +285,7 @@
         if (!this.contestID) {
           return this.$i18n.t('m.Status')
         } else if (this.problemID) {
-          return this.$i18n.t('m.Problem_Submissions')
+          return this.$i18n.t('m.Submissions')
         } else {
           return this.$i18n.t('m.Submissions')
         }

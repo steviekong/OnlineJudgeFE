@@ -44,8 +44,7 @@
           <!-- <div v-if="problem.source">
             <p class="title">{{$t('m.Source')}}</p>
             <p class="content">{{problem.source}}</p>
-          </div>
- -->
+          </div>-->
         </div>
       </Panel>
       <!--problem main end-->
@@ -105,7 +104,7 @@
       <VerticalMenu @on-click="handleRoute">
         <template v-if="this.contestID">
 
-          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && proctoring_webcam" :isResult="true">
+          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && proctoring_webcam && !isAdminRole" :isResult="true">
             <Icon type="checkmark-circled"></Icon>
             Submit Assessment            
           </VerticalMenu-item>
@@ -132,7 +131,7 @@
             {{$t('m.View_Contest')}}
           </VerticalMenu-item>
         </template>
-        <VerticalMenu-item :route="{name: 'help'}">
+        <VerticalMenu-item v-if="contestID" :route="{name: 'help'}">
           <Icon type="help"></Icon>
           Help
         </VerticalMenu-item>  
@@ -363,19 +362,21 @@
         this.$router.push(route)
       },
       askMediaPermissions () {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
-          this.mediaPermissions = true
-        })
-        .catch(error => {
-          this.mediaPermissions = false
-          this.$alert('Please allow this page to use your webcam! Click OK to refresh', 'Warning', {
-            confirmButtonText: 'OK',
-            callback: action => {
-              this.$router.go()
-            }
+        if (!this.isAdminRole) {
+          navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
+            this.mediaPermissions = true
           })
-          return error
-        })
+          .catch(error => {
+            this.mediaPermissions = false
+            this.$alert('Please allow this page to use your webcam! Click OK to refresh', 'Warning', {
+              confirmButtonText: 'OK',
+              callback: action => {
+                this.$router.go()
+              }
+            })
+            return error
+          })
+        }
       },
       onChangeLang (newLang) {
         if (this.problem.template[newLang]) {

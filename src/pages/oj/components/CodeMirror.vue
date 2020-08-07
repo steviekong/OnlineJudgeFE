@@ -10,7 +10,7 @@
         </Select>
 
         <Tooltip :content="this.$i18n.t('m.Reset_to_default_code_definition')" placement="top" style="margin-left: 10px">
-          <Button icon="refresh" @click="onResetClick"></Button>
+          <Button icon="refresh" @click="onResetClick">Reset code and add template</Button>
         </Tooltip>
 
         <Tooltip :content="this.$i18n.t('m.Upload_file')" placement="top" style="margin-left: 10px">
