@@ -45,6 +45,20 @@
             render: (h, params) => {
               return h('span', this.getACRate(params.row.accepted_number, params.row.submission_number))
             }
+          },
+          {
+            title: 'Difficulty',
+            render: (h, params) => {
+              let t = params.row.difficulty
+              let color = 'blue'
+              if (t === 'Low') color = 'green'
+              else if (t === 'High') color = 'yellow'
+              return h('Tag', {
+                props: {
+                  color: color
+                }
+              }, this.$i18n.t('m.' + params.row.difficulty))
+            }
           }
         ],
         OITableColumns: [

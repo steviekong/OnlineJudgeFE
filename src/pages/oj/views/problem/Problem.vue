@@ -103,12 +103,7 @@
     <div id="right-column">
       <VerticalMenu @on-click="handleRoute">
         <template v-if="this.contestID">
-
-          <VerticalMenu-item v-if="!this.contestID || OIContestRealTimePermission && proctoring_webcam && !isAdminRole" :isResult="true">
-            <Icon type="checkmark-circled"></Icon>
-            Submit Assessment            
-          </VerticalMenu-item>
-
+          
           <VerticalMenu-item :route="{name: 'contest-problem-list', params: {contestID: contestID}}">
             <Icon type="ios-photos"></Icon>
             {{$t('m.Problems')}}

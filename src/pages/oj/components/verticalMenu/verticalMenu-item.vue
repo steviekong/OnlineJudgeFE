@@ -1,5 +1,5 @@
 <template>
-  <li @click.stop="handleClick" :class="{disabled: disabled, result: isResult}">
+  <li @click.stop="handleClick" :class="{disabled: disabled}">
     <slot></slot>
   </li>
 </template>
@@ -17,25 +17,11 @@
       disabled: {
         type: Boolean,
         default: false
-      },
-      isResult: {
-        type: Boolean,
-        default: false
       }
     },
     methods: {
       handleClick () {
-        if (this.isResult) {
-          this.$confirm('Are you sure you want to end the assessment?', 'Confirm', {
-            confirmButtonText: 'Confirm',
-            cancelButtonText: 'Cancel',
-            type: 'warning'
-          }).then(() => {
-            window.open(`${process.env.PROCTOR_URL}/contest/result`, '_self')
-          }).catch(() => {
-            this.$error('Submission Cancelled')
-          })
-        } else if (this.route) {
+        if (this.route) {
           this.dispatch('VerticalMenu', 'on-click', this.route)
         }
       }

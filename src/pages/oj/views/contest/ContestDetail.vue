@@ -30,19 +30,16 @@
           </div>
         </template>
       </div>
-      <el-button v-if="!contestMenuDisabled && contest.contest_type != 'Public' " v-on:click="submitContest" v-show="showMenu" class="submit-btn" type="primary">
-        <Icon type="checkmark-circled"></Icon>
-        Submit Assessment
-      </el-button>
+      <div class="flex-container">
+        <el-button v-if="!contestMenuDisabled && contest.contest_type != 'Public' " v-on:click="submitContest" v-show="showMenu" class="submit-btn" type="primary">
+          <Icon type="checkmark-circled"></Icon>
+          Submit Assessment
+        </el-button>
+      </div>
 
     </div>
     <div v-show="showMenu" id="contest-menu">
       <VerticalMenu @on-click="handleRoute">
-
-        <VerticalMenu-item v-if="!contestMenuDisabled && contest.contest_type != 'Public' " :isResult="true">
-          <Icon type="checkmark-circled"></Icon>
-          Submit Assessment
-        </VerticalMenu-item>
 
         <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID}}">
           <Icon type="home"></Icon>
@@ -226,6 +223,7 @@
 
   .submit-btn{
     margin-top: 0.5%;
+
   }
 
   .flex-container {
@@ -248,6 +246,9 @@
         width: 200px;
         margin-right: 10px;
       }
+    }
+    .submit-btn{
+      margin-left: 11%;
     }
   }
 </style>
