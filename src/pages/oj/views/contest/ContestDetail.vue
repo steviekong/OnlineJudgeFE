@@ -30,6 +30,10 @@
           </div>
         </template>
       </div>
+      <el-button v-if="!contestMenuDisabled && contest.contest_type != 'Public' " v-on:click="submitContest" v-show="showMenu" class="submit-btn" type="primary">
+        <Icon type="checkmark-circled"></Icon>
+        Submit Assessment
+      </el-button>
 
     </div>
     <div v-show="showMenu" id="contest-menu">
@@ -164,6 +168,17 @@
         }, (res) => {
           this.btnLoading = false
         })
+      },
+      submitContest () {
+        this.$confirm('Are you sure you want to end the assessment?', 'Confirm', {
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          window.open(`${process.env.PROCTOR_URL}/contest/result`, '_self')
+        }).catch(() => {
+          this.$error('Submission Cancelled')
+        })
       }
     },
     computed: {
@@ -207,6 +222,10 @@
 
   #countdown {
     font-size: 16px;
+  }
+
+  .submit-btn{
+    margin-top: 0.5%;
   }
 
   .flex-container {
