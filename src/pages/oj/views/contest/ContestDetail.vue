@@ -248,7 +248,7 @@
       }
     }
     .submit-btn{
-      margin-left: 11%;
+      margin-left: 10%;
     }
   }
 </style>
