@@ -39,7 +39,7 @@
   </Panel>
 </template>
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   import Pagination from '@oj/components/Pagination'
   import ContestRankMixin from './contestRankMixin'
@@ -75,16 +75,7 @@
             title: this.$i18n.t('m.Total_Score'),
             align: 'center',
             render: (h, params) => {
-              return h('a', {
-                on: {
-                  click: () => {
-                    this.$router.push({
-                      name: 'contest-submission-list',
-                      query: {username: params.row.user.username}
-                    })
-                  }
-                }
-              }, params.row.total_score)
+              return h('span', params.row.total_score)
             }
           }
         ],
@@ -174,6 +165,11 @@
         let dataRank = JSON.parse(JSON.stringify(data))
         // 从submission_info中取出相应的problem_id 放入到父object中,这么做主要是为了适应iview table的data格式
         // 见https://www.iviewui.com/components/table
+        if (!this.isAdminRole) {
+          dataRank = dataRank.filter((value) => {
+            return value.user.username === this.user.username
+          })
+        }
         dataRank.forEach((rank, i) => {
           let info = rank.submission_info
           Object.keys(info).forEach(problemID => {
@@ -210,10 +206,10 @@
             }
           })
         })
-      },
-      downloadRankCSV () {
-        utils.downloadFile(`contest_rank?download_csv=1&contest_id=${this.$route.params.contestID}&force_refrash=${this.forceUpdate ? '1' : '0'}`)
       }
+    },
+    computed: {
+      ...mapGetters(['user', 'isAdminRole'])
     }
   }
 </script>
