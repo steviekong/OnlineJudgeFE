@@ -48,38 +48,38 @@ export default [
   {
     name: 'problem-list',
     path: '/problem',
-    meta: {title: 'Problem List'},
+    meta: {title: 'Problem List', requiresAuth: true},
     component: ProblemList
   },
   {
     name: 'problem-details',
     path: '/problem/:problemID',
-    meta: {title: 'Problem Details'},
+    meta: {title: 'Problem Details', requiresAuth: true},
     component: Problem
   },
   {
     name: 'submission-list',
     path: '/status',
-    meta: {title: 'Submission List'},
+    meta: {title: 'Submission List', requiresAuth: true},
     component: SubmissionList
   },
   {
     name: 'submission-details',
     path: '/status/:id/',
-    meta: {title: 'Submission Details'},
+    meta: {title: 'Submission Details', requiresAuth: true},
     component: SubmissionDetails
   },
   {
     name: 'contest-list',
     path: '/contest',
-    meta: {title: 'Contest List'},
+    meta: {title: 'Contest List', requiresAuth: true},
     component: Contest.ContestList
   },
   {
     name: 'contest-details',
     path: '/contest/:contestID/',
     component: Contest.ContestDetails,
-    meta: {title: 'Contest Details'},
+    meta: {title: 'Contest Details', requiresAuth: true},
     children: [
       {
         name: 'contest-submission-list',
@@ -116,13 +116,13 @@ export default [
   {
     name: 'acm-rank',
     path: '/acm-rank',
-    meta: {title: 'ACM Rankings'},
+    meta: {title: 'ACM Rankings', requiresAuth: true},
     component: ACMRank
   },
   {
     name: 'oi-rank',
     path: '/oi-rank',
-    meta: {title: 'OI Rankings'},
+    meta: {title: 'OI Rankings', requiresAuth: true},
     component: OIRank
   },
   {

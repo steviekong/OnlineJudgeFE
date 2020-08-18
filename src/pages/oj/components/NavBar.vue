@@ -6,19 +6,19 @@
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
       </Menu-item>
-      <Menu-item name="/problem">
+      <Menu-item v-if="isAuthenticated" name="/problem">
         <Icon type="ios-keypad"></Icon>
         {{$t('m.NavProblems')}}
       </Menu-item>
-      <Menu-item name="/contest">
+      <Menu-item v-if="isAuthenticated" name="/contest">
         <Icon type="trophy"></Icon>
         {{$t('m.Contests')}}
       </Menu-item>
-      <Menu-item name="/status">
+      <Menu-item v-if="isAuthenticated" name="/status">
         <Icon type="ios-pulse-strong"></Icon>
         {{$t('m.NavStatus')}}
       </Menu-item>
-      <Submenu name="rank">
+      <Submenu v-if="isAuthenticated" name="rank">
         <template slot="title">
           <Icon type="podium"></Icon>
           {{$t('m.Rank')}}
