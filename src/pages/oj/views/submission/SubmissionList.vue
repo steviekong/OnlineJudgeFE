@@ -120,13 +120,19 @@
                             name: 'contest-problem-details',
                             params: {problemID: params.row.problem, contestID: this.contestID}
                           })
+                      } else if (params.row.contest) {
+                        this.$router.push(
+                          {
+                            name: 'contest-problem-details',
+                            params: {problemID: params.row.problem, contestID: params.row.contest}
+                          })
                       } else {
                         this.$router.push({name: 'problem-details', params: {problemID: params.row.problem}})
                       }
                     }
                   }
                 },
-                params.row.problem)
+                [params.row.contest & (!this.contestID) ? params.row.contest + ' : ' + params.row.problem : params.row.problem])
             }
           },
           {
