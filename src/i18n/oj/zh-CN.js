@@ -115,6 +115,7 @@ export const m = {
   Rankings: '排名',
   Overview: '概要',
   Admin_Helper: '管理员助手',
+  Similar_Check: '相似度检测',
   StartAt: '开始时间',
   EndAt: '结束时间',
   ContestType: '比赛类型',

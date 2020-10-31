@@ -115,6 +115,7 @@ export const m = {
   Rankings: 'Rankings',
   Overview: 'Overview',
   Admin_Helper: 'Admin Helper',
+  Similar_Check: 'Similar Checker',
   StartAt: 'StartAt',
   EndAt: 'EndAt',
   ContestType: 'ContestType',
