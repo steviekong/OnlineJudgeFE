@@ -49,7 +49,6 @@
   import utils from '@/utils/utils'
   import time from '@/utils/time'
   import Pagination from '@/pages/oj/components/Pagination'
-
   export default {
     name: 'submissionList',
     components: {
@@ -132,7 +131,7 @@
                     }
                   }
                 },
-                [params.row.contest & (!this.contestID) ? params.row.contest + ' : ' + params.row.problem : params.row.problem])
+                [params.row.contest != null & this.contestID == null ? params.row.contest + ' : ' + params.row.problem : params.row.problem])
             }
           },
           {
