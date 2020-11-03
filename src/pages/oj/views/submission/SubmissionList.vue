@@ -49,7 +49,6 @@
   import utils from '@/utils/utils'
   import time from '@/utils/time'
   import Pagination from '@/pages/oj/components/Pagination'
-
   export default {
     name: 'submissionList',
     components: {
@@ -120,13 +119,19 @@
                             name: 'contest-problem-details',
                             params: {problemID: params.row.problem, contestID: this.contestID}
                           })
+                      } else if (params.row.contest) {
+                        this.$router.push(
+                          {
+                            name: 'contest-problem-details',
+                            params: {problemID: params.row.problem, contestID: params.row.contest}
+                          })
                       } else {
                         this.$router.push({name: 'problem-details', params: {problemID: params.row.problem}})
                       }
                     }
                   }
                 },
-                params.row.problem)
+                [params.row.contest != null & this.contestID == null ? params.row.contest + ' : ' + params.row.problem : params.row.problem])
             }
           },
           {
